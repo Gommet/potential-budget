@@ -1,4 +1,4 @@
-# example
+# Budget Application
 
 A new Flutter project.
 
