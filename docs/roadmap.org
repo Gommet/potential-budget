@@ -81,6 +81,9 @@ CREATE TABLE AssociatedWord(wordId Integer Primary Key, word Text Unique, tag In
 CREATE TABLE Exchange(exchangeId Integer Primary Key, name Text, conversion Real, symbol Text) Strict;
 
 #+end_src
+
+** Migrating from sqflite
+So sqflite is what is expected to use for data persistance. The problem is that it does not go well with tests. On the other hand, ~drift~ is another library that can be tested in local tests. As this is a goal to have, I will start using ~drift~ instead of ~sqflite~. Note that in my personal opionion, this sucks, as I already started learning sqflite, and learning sqflite was easier as it is an SQL language.
 * PROJ Command Pallette
 Although the application is fine, I feel like sometimes I need a faster way to put the expenses quickly.
 
