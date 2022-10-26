@@ -13,7 +13,57 @@ It's not good to define a good code coverage, but I feel like getting around a 9
 * PROJ Database
 I want to make a database so that the application is offline. After all, what motivated me to do the application was when I travell have my exenses annotated. It would be weird if I need internet, when most of the time I don't have it. Maybe syncronizing later with a shared database / backend, but who knows?
 
-** TODO Class diagram
+** Class diagram
+#+begin_src plantuml :file img/db.png :dir .
+!theme reddress-darkblue
+class Budget {
+        + budget : double
+        + description : Text
+        + day: Real
+        + tag : Tag
+}
+
+class Tag {
+        tagColor : Color/Hex
+        name : Text
+        monthly_limit: Real
+}
+
+class Exchange {
+        + name: Text
+        + conversion: Real
+        + symbol: Text
+}
+
+class AssociatedWord{
+        + word: Text
+        + tag : Tag
+}
+
+Budget "*" *- "1" Tag
+Tag "1" -- "*" AssociatedWord
+
+#+end_src
+
+#+RESULTS:
+[[file:img/db.png]]
+
+*** Description
++ Budget :: Holds an expense that has been done. It holds 4 values:
+  + budget :: the expense
+  + description :: A small description to know what is about
+  + day :: the day of the expense
+  + tag :: tag associated
++ Tag :: Contains the tag that will be grouped for the expenses
++ Exchange :: As it is for travelling, it is cool to have a conversion between the different values, as if you want to support more than one currency.
++ AssociatedWord :: When using the command pallette, i will be using frequently words like "dinner", or "launch", so having an associatedWord that automatically pushes the tag will be better.
+
+
+
+
+
+
+  
 
 ** TODO Define Service for database
 
