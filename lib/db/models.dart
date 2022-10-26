@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:path/path.dart';
+import 'package:sqflite/sqflite.dart';
 
 // TODO make tests of constructors. They should be identity fromMap . toMap
 
@@ -66,4 +68,20 @@ class ExchangeModel {
       : name = m['name'] as String,
         conversion = m['conversion'] as double,
         symbol = m['symbol'] as String;
+}
+
+void createDatabase() async {
+  openDatabase(
+    join(await getDatabasesPath(), 'budget.db'),
+    onCreate: (db, version) {
+      return db.transaction(
+          (txn) async {
+            txn.execute("CREATE TABLE Tag(tagId Integer Primary Key, tagColor Integer, tagName Text Unique) STRICT;");
+            txn.execute("CREATE TABLE Budget(budgetId Integer Primary Key, budget Real, description Text, day Integer, tagId Integer, Foreign Key(tagId) References TAG(tagId)) STRICT;");
+            txn.execute("CREATE TABLE AssociatedWord(wordId Integer Primary Key, word Text Unique, tag Integer, Foreign Key(tag) References Tag(tagId)) Strict;");
+            txn.execute("CREATE TABLE Exchange(exchangeId Integer Primary Key, name Text, conversion Real, symbol Text) Strict;");
+          });
+    },
+    version: 1,
+  );
 }

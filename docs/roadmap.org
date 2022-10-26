@@ -17,27 +17,30 @@ I want to make a database so that the application is offline. After all, what mo
 #+begin_src plantuml :file img/db.png :dir .
 !theme reddress-darkblue
 class Budget {
-        + budget : double
+        + budgetId: Integer
+        + budget : Real
         + description : Text
-        + day: Real
-        + tag : Tag
+        + day: Integer
+        + tag : Integer
 }
 
 class Tag {
-        tagColor : Color/Hex
-        name : Text
-        monthly_limit: Real
+        + tagId: Integer
+        + tagColor : Integer
+        + tagName : TextUnique
 }
 
 class Exchange {
+        + exhangeId: Integer
         + name: Text
         + conversion: Real
         + symbol: Text
 }
 
 class AssociatedWord{
-        + word: Text
-        + tag : Tag
+        + wordId: Integer
+        + word: Text Unique
+        + tag : Integer
 }
 
 Budget "*" *- "1" Tag
@@ -67,6 +70,17 @@ Tag "1" -- "*" AssociatedWord
 
 ** TODO Define Service for database
 
+** DB Scheme
+#+begin_src sqlite
+CREATE TABLE Tag(tagId Integer Primary Key, tagColor Integer, tagName Text Unique) STRICT;
+
+CREATE TABLE Budget(budgetId Integer Primary Key, budget Real, description Text, day Integer, tagId Integer, Foreign Key(tagId) References TAG(tagId)) STRICT;
+
+CREATE TABLE AssociatedWord(wordId Integer Primary Key, word Text Unique, tag Integer, Foreign Key(tag) References Tag(tagId)) Strict;
+
+CREATE TABLE Exchange(exchangeId Integer Primary Key, name Text, conversion Real, symbol Text) Strict;
+
+#+end_src
 * PROJ Command Pallette
 Although the application is fine, I feel like sometimes I need a faster way to put the expenses quickly.
 
