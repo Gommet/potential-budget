@@ -1,0 +1,23 @@
+#+title: Roadmap
+This document contains the roadmap that the project will have, along with the necessary images, documentation, and things to make the development a breeze.
+
+* PROJ Unit tests for widgets
+The widgets that I have developed untill now don't have tests on them. It would be better if the project had a better unit tests, as it makes the program more robust to change things arround, which I must say that I am inclined to do it on a weekly basis.
+
+** TODO Automating running tests + code coverage in GitHub
+The first thing is to guarantee that the tests are run. I feel that most programmers forget to do it.
+
+** TODO Code coverage arround 90%
+It's not good to define a good code coverage, but I feel like getting around a 90% should be a priority.
+
+* PROJ Database
+I want to make a database so that the application is offline. After all, what motivated me to do the application was when I travell have my exenses annotated. It would be weird if I need internet, when most of the time I don't have it. Maybe syncronizing later with a shared database / backend, but who knows?
+
+** TODO Class diagram
+
+** TODO Define Service for database
+
+* PROJ Command Pallette
+Although the application is fine, I feel like sometimes I need a faster way to put the expenses quickly.
+
+Developing a command pallete that I can click and fill it quickly could become a better experience for the end user. This project defines how the Command Pallette should be defined, and how it will be implemented.
