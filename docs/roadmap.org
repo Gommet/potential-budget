@@ -71,3 +71,43 @@ Tag "1" -- "*" AssociatedWord
 Although the application is fine, I feel like sometimes I need a faster way to put the expenses quickly.
 
 Developing a command pallete that I can click and fill it quickly could become a better experience for the end user. This project defines how the Command Pallette should be defined, and how it will be implemented.
+
+** Commands
+Commands are described as:
+1. An Array/Tree containing all the possible commands. Maybe a tree will be better, but I feel like it is faster this way to program, and easier to create more commands.
+
+   1. The set of the tree must be unique. That is ~list(set(commands)) == commands~
+
+   2. Example
+      #+begin_src dot :file img/command-example.png
+digraph G {
+        node [shape=none];
+        "*" -> tag -> "<color>" -> "<tagName>";
+        "*" -> "push" -> "<number>" -> "<exp?>" -> "<currency>" -> "<desc>"
+        "*" -> "..."
+        }
+      #+end_src
+
+      #+RESULTS:
+      [[file:img/command-example.png]]
+
+   3. Pattern:
+      Should be filled exactly. This is just so that you are able to tell which command to execute next.
+
+   4. <pattern>
+      Should be filled with a type of pattern. Although the classes will be defined more accordingly later, this pattern should contain a flew methods, as to evalute if the expression is correct, and change the state accordingly when this happens. If not, provide an error.
+
+2. Suggestions:
+   So I want each step to be able to give suggestions about how it should be filled, as it makes the parsing easier, and the user experience seems better. For example, at first it should be able to tell which commands are available, and order them for their usage / how I feel it should be order.
+
+   I think the suggestions should be a Widget to be defined in the step, as a tag should have a color associated, and other steps will need different values. The priority is that the Command can be used as a package perse, as I will be using it for a few projects, so a little bit of overengineering should be better in the long run.
+
+3. Validator
+   When a space is hit things should happen:
+   1. The input is validated:
+      + if the input is bad, an error message pops up and the space is removed
+      + if the input is correct, the state is updated so it holds the informaion about the command, and the new suggestions are shown using the context (as it may change given the current state.)
+   2. If after the validation there is an end step, a series of steps are executed to ensure that the database is done.
+
+** TODO Class diagram
+I should do the class diagram, but it seems rather difficult, so I will try to do it after I finish the Database.
